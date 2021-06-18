@@ -4,6 +4,6 @@ app = Flask(__name__)
 
 app.config.from_object('config')
 
-from app.controllers.home import bp
+from app.controllers.problems import bp
 app.register_blueprint(bp)
 
