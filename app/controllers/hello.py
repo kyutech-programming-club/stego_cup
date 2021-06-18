@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint
 
-bp = Blueprint('hello', __name__)
+bp = Blueprint('controllers', __name__)
 
 @bp.route("/")
 def hello():
