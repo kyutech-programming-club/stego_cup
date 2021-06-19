@@ -24,7 +24,7 @@ def problem(id):
 
     is_correct = 1
 
-    if ans_list.length != code_list.length:
+    if len(ans_list) != len(code_list):
       is_correct = 0
     else:
       for ans_line, code_line in zip(ans_list, code_list):

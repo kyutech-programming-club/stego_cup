@@ -27,22 +27,13 @@
 
 <form method="POST">
   <input type="hidden" id="form" name="code" value="">	
-  <!-- エディタの中身をとってくる。 -->
   <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
-  <input class="btn btn-primary" id="btn" type="submit" value='提出'>
+  <input class="btn btn-primary" id="btn" type="submit" value='提出' onclick='return confirm("ほんとによき？");'/>
 </form>
-
-<script>
-  var btn = document.getElementById('btn');
-  btn.addEventListener('click', function() {
-      window.confirm('ほんとによき？');
-  });
-</script>
 
 <form action="/" method="get">
   <input class="btn btn-danger" type="submit" value='戻る'>
 </form>
-
 
 <audio id="type" src="../static/music/cat_like2a.mp3" type="audio/meg"></audio>
   
