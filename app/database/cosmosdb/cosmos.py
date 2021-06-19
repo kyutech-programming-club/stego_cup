@@ -2,8 +2,8 @@ import azure.cosmos.cosmos_client as cosmos_client
 import azure.cosmos.exceptions as exceptions
 from azure.cosmos.partition_key import PartitionKey
 import os
-from app.database.cosmosdb.db_config import settings
-
+# from app.database.cosmosdb.db_config import settings
+from db_config import settings
 # ----------------------------------------------------------------------------------------------------------
 # Prerequistes -
 #
@@ -62,16 +62,16 @@ def select_ans(container, id):
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
 
-  except exceptions.CosmosResourceNotFoundError:
-    print('A database with id \'{0}\' does not exist'.format(id))
-
-def choise_ans(container, id):
+def choice_ans(container, id):
   try:
-    query = "SELECT c.select_ans FROM c WHERE c.id = \"{0}\"".format(id)
+    query = "SELECT c.choice_ans FROM c WHERE c.id = \"{0}\"".format(id)
     item = container.query_items(query, enable_cross_partition_query=True)
     answer = list(item)
-    return answer[0]['select_ans']
-
+    c_ans = answer[0]['choice_ans'].split(',')
+    return c_ans[2]
+  
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
 
+if __name__ == '__main__':
+  print(choice_ans(container, 1))
