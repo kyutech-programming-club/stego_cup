@@ -16,15 +16,15 @@ def problem(id):
     answer = select_ans(container, id)
     code = request.form['code']
 
-    print("answer")
-    print(answer)
-    print("code")
-    print(code)
+    ans_list = answer.splitlines()
+    code_list = code.splitlines()
 
-    if answer == code:
-      is_correct = 1
-    else:
-      is_correct = 0
+    is_correct = 1
+
+    for (ans_line, code_line) in zip(ans_list, code_list):
+      if ans_line != code_line:
+        is_correct = 0
+        break
 
     return redirect(url_for('problems.result', is_correct=is_correct))
 
