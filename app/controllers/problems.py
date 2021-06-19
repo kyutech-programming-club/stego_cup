@@ -2,7 +2,6 @@ from flask import Flask, Blueprint, render_template, request
 from app.database.cosmosdb.cosmos import *
 
 bp = Blueprint('problems', __name__)
-app = Flask(__name__)
 
 @bp.route("/")
 def index():
