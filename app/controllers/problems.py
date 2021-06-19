@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, request
 from app.database.cosmosdb.cosmos import *
 
 bp = Blueprint('problems', __name__)
@@ -12,9 +12,9 @@ def index():
   
 @bp.route("/<int:id>/promblem", methods=('GET', 'POST') )
 def problem(id):
-  # if request.method == 'POST':
-  #   answer = select_ans(container, id)
-  
+  if request.method == 'POST':
+    answer = select_ans(container, id)
+    code = request.form['code']
   problem_list = select_problem(container, id)
   problem = problem_list[0]
   temp_ans = problem_list[1]
@@ -24,4 +24,3 @@ def problem(id):
                           temp_ans=temp_ans,
                           choice_ans=choice_ans
                         )
-

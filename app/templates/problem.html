@@ -5,15 +5,32 @@
 <br>
 <p>{{ problem }}</p>
 
-  <script>
-    var editor = CodeMirror(document.body, {
-      value: '# Your code here!!\n',
-      lineNumbers: true,
-      theme: 'monokai custom',
-      mode: 'python'
-    });
-  </script>
-<input class="btn btn-primary" type="submit" value="提出">
+<script id=hoge>
+  var code = "";
+  var editor = CodeMirror(document.body, {
+    value: '# Your code here!!\n',
+    lineNumbers: true,
+    theme: 'monokai custom',
+    mode: 'python'
+  }).on('change', after_editor => {
+    code = after_editor.getValue();
+    var val = document.getElementById('form');
+    val.value = code;
+    console.log(val)
+  });
+</script>
+
+<form method="POST">
+  <input type="hidden" id="form" name="code" value="">	
+  <!-- エディタの中身をとってくる。 -->
+  <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
+  <input class="btn btn-primary" type="submit" value='提出'>
+</form>
+
+<form action="/" method="get">
+  <input class="btn btn-danger" type="submit" value='戻る'>
+</form>
+
 
 <audio id="type" src="../static/music/cat_like2a.mp3" type="audio/meg"></audio>
   
