@@ -2,3 +2,10 @@
 <p>
   This page will display the question text, editor, etc.
 </p>
+<audio id="type" src="../static/music/cat_like2a.mp3" type="audio/meg"></audio>
+<script>
+  const audioType = document.getElementById("type");
+  window.onkeydown = function(e){
+    audioType.play();
+  };
+</script>
