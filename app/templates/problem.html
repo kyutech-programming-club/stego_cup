@@ -3,12 +3,16 @@
 {% block content %}
 <h2>問題文</h2>
 <br>
-<p>{{ problem }}</p>
+<h3>{{ problem }}</h3>
+<p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
 
 <script id=hoge>
+  var temp_ans = document.getElementById("ahi").textContent
+  console.log(temp_ans);
+
   var code = "";
   var editor = CodeMirror(document.body, {
-    value: '# Your code here!!\n',
+    value: temp_ans,
     lineNumbers: true,
     theme: 'monokai custom',
     mode: 'python'
