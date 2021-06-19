@@ -2,8 +2,8 @@ import azure.cosmos.cosmos_client as cosmos_client
 import azure.cosmos.exceptions as exceptions
 from azure.cosmos.partition_key import PartitionKey
 import os
-# from app.database.cosmosdb.db_config import settings
-from db_config import settings
+from app.database.cosmosdb.db_config import settings
+# from db_config import settings
 # ----------------------------------------------------------------------------------------------------------
 # Prerequistes -
 #
@@ -29,8 +29,9 @@ def select_all_questions(container):
     item = container.query_items(query, enable_cross_partition_query=True)
     questions = list(item)
     question_list = []
+    print(questions)
 
-    for question in questions[0]:
+    for question in questions:
       question_list.append(question['question'])
 
     return question_list
@@ -62,7 +63,7 @@ def select_ans(container, id):
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
 
-def choice_ans(container, id):
+def select_choice_ans(container, id):
   try:
     query = "SELECT c.choice_ans FROM c WHERE c.id = \"{0}\"".format(id)
     item = container.query_items(query, enable_cross_partition_query=True)
@@ -72,6 +73,3 @@ def choice_ans(container, id):
   
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
-
-if __name__ == '__main__':
-  print(choice_ans(container, 1))
