@@ -4,9 +4,11 @@ bp = Blueprint('problems', __name__)
 
 @bp.route("/")
 def index():
-  return render_template('index.html')
+  problems = {1:"hoge1", 2:"hoge2"}
+  return render_template('index.html', problems=problems)
   
-@bp.route("/promblem")
+@bp.route("/<int:id>/promblem")
 def problem(id):
-  return render_template('problem.html')
+  problems = {1:"hoge1", 2:"hoge2"}
+  return render_template('problem.html', problem=problems[id])
 
