@@ -23,22 +23,31 @@ client = cosmos_client.CosmosClient(HOST, {'masterKey': MASTER_KEY})
 db = client.get_database_client(DATABASE_ID)
 container = db.get_container_client(CONTAINER_ID)
 
-def select_question_all(container):
+def select_all_questions(container):
   try:
     query = "SELECT c.question FROM c"
     item = container.query_items(query, enable_cross_partition_query=True)
-    question = list(item)
-    return question[0]
+    questions = list(item)
+    question_list = []
+
+    for question in questions[0]:
+      question_list.append(question['question'])
+
+    return question_list
 
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
 
-def select_question(container, id):
+def select_problem(container, id):
   try:
     query = "SELECT c.question, c.temp_ans FROM c WHERE c.id = \"{0}\"".format(id)
     item = container.query_items(query, enable_cross_partition_query=True)
-    question = list(item)
-    return question[0]['question']
+    problem = list(item)[0]
+    problem_list = []
+    problem_list.append(problem['question'])
+    problem_list.append(problem['temp_ans'])
+
+    return problem_list
 
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
@@ -53,16 +62,6 @@ def select_ans(container, id):
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
 
-def temp_ans(container, id):
-  try:
-    query = "SELECT c.temp_ans FROM c WHERE c.id = \"{0}\"".format(id)
-    item = container.query_items(query, enable_cross_partition_query=True)
-    answer = list(item)
-    return answer[0]['temp_ans']
-
-  except exceptions.CosmosResourceNotFoundError:
-    print('A database with id \'{0}\' does not exist'.format(id))
-
 def choice_ans(container, id):
   try:
     query = "SELECT c.choice_ans FROM c WHERE c.id = \"{0}\"".format(id)
@@ -70,9 +69,9 @@ def choice_ans(container, id):
     answer = list(item)
     c_ans = answer[0]['choice_ans'].split(',')
     return c_ans[2]
+  
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
-
 
 if __name__ == '__main__':
   print(choice_ans(container, 1))
