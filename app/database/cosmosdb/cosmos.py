@@ -29,7 +29,6 @@ def select_all_questions(container):
     item = container.query_items(query, enable_cross_partition_query=True)
     questions = list(item)
     question_list = []
-    print(questions)
 
     for question in questions:
       question_list.append(question['question'])

@@ -6,12 +6,14 @@ bp = Blueprint('problems', __name__)
 @bp.route("/")
 def index():
   problems = select_all_questions(container)
+  print("problems is")
+  print(problems)
   return render_template('index.html', problems=problems)
   
 @bp.route("/<int:id>/promblem", methods=('GET', 'POST') )
 def problem(id):
-  if request.method == 'POST':
-    answer = select_ans(container, id)
+  # if request.method == 'POST':
+  #   answer = select_ans(container, id)
   
   problem_list = select_problem(container, id)
   problem = problem_list[0]
