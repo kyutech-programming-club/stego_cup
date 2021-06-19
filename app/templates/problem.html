@@ -1,56 +1,48 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <!-- lib内のライブラリ(cssとjs)をインポート -->
-  <link rel="stylesheet" href="../static/lib/codemirror.css">
-  <!-- themeでエディタの色変更 -->
-  <link rel="stylesheet" href="../static/theme/monokai.css">
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- ちょっとおしゃれにしたいとき -->
-  <link rel="stylesheet" href="problem.css">
-  <script src="../static/lib/codemirror.js"></script>
-  <script src="../static/mode/python/python.js"></script>
-  <!-- bootstrap -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-</head>
+{% extends 'default.html' %}
 
-<body>
-    <!-- Image and text -->
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="">
-      <img src="/app/static/assets/images.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
-      Noise Corder
-    </a>
-    <!-- <span class="navbar-text">
-      <a href="">User</a>
-    </span> -->
-  </nav>
-
+{% block content %}
 <h2>問題文</h2>
 <br>
-<p>{{ problem }}</p>
+<h3>{{ problem }}</h3>
+<p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
 
-  <script>
-    var editor = CodeMirror(document.body, {
-      value: '# Your code here!!\n',
-      lineNumbers: true,
-      theme: 'monokai custom',
-      mode: 'python'
-    });
-  </script>
-<input class="btn btn-primary" type="submit" value="提出">
+<script id=hoge>
+  var temp_ans = document.getElementById("ahi").textContent
+  console.log(temp_ans);
+
+  var code = "";
+  var editor = CodeMirror(document.body, {
+    value: temp_ans,
+    lineNumbers: true,
+    theme: 'monokai custom',
+    mode: 'python'
+  }).on('change', after_editor => {
+    code = after_editor.getValue();
+    var val = document.getElementById('form');
+    val.value = code;
+    console.log(val)
+  });
+</script>
+
+<form method="POST">
+  <input type="hidden" id="form" name="code" value="">	
+  <!-- エディタの中身をとってくる。 -->
+  <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
+  <input class="btn btn-primary" type="submit" value='提出'>
+</form>
+
+<form action="/" method="get">
+  <input class="btn btn-danger" type="submit" value='戻る'>
+</form>
+
 
 <audio id="type" src="../static/music/cat_like2a.mp3" type="audio/meg"></audio>
   
-</body>
-</html>
 <script>
   const audioType = document.getElementById("type");
   window.onkeydown = function(e){
     audioType.play();
   };
 </script>
+
+{% endblock %}

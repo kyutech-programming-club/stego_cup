@@ -1,14 +1,28 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, request
+from app.database.cosmosdb.cosmos import *
 
 bp = Blueprint('problems', __name__)
 
 @bp.route("/")
 def index():
-  problems = {1:"hoge1", 2:"hoge2"}
+  problems = select_all_questions(container)
+  print("problems is")
+  print(problems)
   return render_template('index.html', problems=problems)
   
-@bp.route("/<int:id>/promblem")
+@bp.route("/<int:id>/promblem", methods=('GET', 'POST') )
 def problem(id):
-  problems = {1:"hoge1", 2:"hoge2"}
-  return render_template('problem.html', problem=problems[id])
+  if request.method == 'POST':
+    answer = select_ans(container, id)
+    code = request.form['code']
+
+  problem_list = select_problem(container, id)
+  problem = problem_list[0]
+  temp_ans = problem_list[1]
+  choice_ans = select_choice_ans(container, id)
+  return render_template( 'problem.html', 
+                          problem=problem,
+                          temp_ans=temp_ans,
+                          choice_ans=choice_ans
+                        )
 
