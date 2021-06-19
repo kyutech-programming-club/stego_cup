@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <!-- bootstrap -->
@@ -8,15 +10,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
 
+<body>
 <!-- Image and text -->
 <nav class="navbar navbar-dark bg-dark">
 <a class="navbar-brand" href="">
     <img src="/app/static/assets/images.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
     Noise Corder
 </a>
-<span class="navbar-text">
-    <a href="/">User</a>
-</span>
 </nav>
 
 <h1>問題一覧</h1>
@@ -24,3 +24,24 @@
 {% for pro_num in problems %}
 <a href="{{ url_for('problems.problem', id=pro_num)}}">{{ problems[pro_num] }}<br></a>
 {% endfor %}
+
+
+<audio src="../static/music/n21.mp3" type="audio/mpeg"></audio>
+<button id="btn_play">再生</button>
+<button id="btn_pause">一時停止</button>
+</body>
+</html>
+
+<script>
+  const btn_play = document.getElementById("btn_play");
+  const btn_pause = document.getElementById("btn_pause");
+  const audioElement = document.querySelector("audio");
+
+  btn_play.addEventListener("click", e => {
+    audioElement.play();
+  });
+
+  btn_pause.addEventListener("click", e => {
+    audioElement.pause();
+  });
+</script>
