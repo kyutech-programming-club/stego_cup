@@ -37,7 +37,8 @@ def problem(id):
   return render_template( 'problem.html', 
                           problem=problem,
                           temp_ans=temp_ans,
-                          choice_ans=choice_ans
+                          choice_ans=choice_ans,
+                          id=id
                         )
 
 @bp.route("/correct")
