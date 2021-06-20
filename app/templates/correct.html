@@ -2,4 +2,15 @@
 
 {% block content %}
 <h1>結果ハッピョーーーーう！！</h1>
+<iframe allow="autoplay" style="display:none" id="correct_sound"></iframe> 
+<script>
+  var random_num = Math.floor(Math.random() * 3);
+  if (random_num == 0) {
+    document.getElementById('correct_sound').src = '../static/music/voice_sample/Seikai1.mp3';
+  } else if (random_num == 1) {
+    document.getElementById('correct_sound').src = '../static/music/voice_sample/Seikai2.mp3';
+  } else if (random_num == 2) {
+    document.getElementById('correct_sound').src = '../static/music/voice_sample/Seikai3.mp3';
+  }
+</script>
 {% endblock %}
