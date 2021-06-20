@@ -11,4 +11,14 @@
 	          width: 900px;
             font-size: 700%;">
             不正解です！！</h1>
+
+<iframe allow="autoplay" style="display:none" id="incorrect_sound"></iframe> 
+<script>
+  var random_num = Math.floor(Math.random() * 2);
+  if (random_num == 0) {
+    document.getElementById('incorrect_sound').src = '../static/music/voice_sample/Huseikai1.mp3';
+  } else if (random_num == 1) {
+    document.getElementById('incorrect_sound').src = '../static/music/voice_sample/Huseikai2.mp3';
+  }
+</script>
 {% endblock %}
