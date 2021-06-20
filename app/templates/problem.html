@@ -1,11 +1,11 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<h2 class="m-2">
+<h2 class="m-2" style="font-family: 'DotGothic16', sans-serif;">
   <b>問題文</b>
 </h2>
 <hr>
-<p class="m-2">{{ problem }}</p>
+<p class="m-2" style="font-family: 'DotGothic16', sans-serif;">{{ problem }}</p>
 <p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
 <p id="fuga" style="visibility:hidden">{{ id }}</p>
 
@@ -27,14 +27,14 @@
   });
 </script>
 <br>
-<h2 class="m-2">
+<h2 class="m-2" style="font-family: 'DotGothic16', sans-serif;">
   <b>選択肢</b>
 </h2>
 <div class="container">
   <div class="row justify-content-md-center">
     {% for choice in choice_ans %}
       <div class="col-sm">
-        <h5 class="text-center">{{ choice }}</h5>
+        <h5 class="text-center" style="font-family: 'DotGothic16', sans-serif;">{{ choice }}</h5>
       </div>
     {% endfor %}
   </div>
