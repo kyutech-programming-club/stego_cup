@@ -22,19 +22,14 @@ def problem(id):
     ans_list = answer.splitlines()
     code_list = code.splitlines()
 
-    is_correct = 1
-
     if len(ans_list) != len(code_list):
-      is_correct = 0
+      return redirect(url_for('problems.incorrect'))
     else:
       for ans_line, code_line in zip(ans_list, code_list):
-        print(ans_line)
-        print(code_line)
         if ans_line != code_line:
-          is_correct = 0
-          break
-
-    return redirect(url_for('problems.result', is_correct=is_correct))
+          return redirect(url_for('problems.incorrect'))
+          
+    return redirect(url_for('problems.correct'))
 
   problem = problem_list[0]
   choice_ans = select_choice_ans(container, id)
@@ -44,7 +39,12 @@ def problem(id):
                           temp_ans=temp_ans,
                           choice_ans=choice_ans
                         )
-@bp.route("/<int:is_correct>/result")
-def result(is_correct):
-  return render_template('result.html', is_correct=is_correct)
+
+@bp.route("/correct")
+def correct():
+  return render_template('correct.html')
+
+@bp.route("/incorrect")
+def incorrect():
+  return render_template('incorrect.html')
 
