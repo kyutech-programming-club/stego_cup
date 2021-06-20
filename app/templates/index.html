@@ -3,22 +3,22 @@
 {% block content %}
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><b>問題一覧</b></a>
+    <a class="navbar-brand" style="font-family: 'DotGothic16', sans-serif;" href="#"><b>問題一覧</b></a>
   </div>
 </nav>
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">問題名</th>
+      <th scope="col" style="font-family: 'DotGothic16', sans-serif;">#</th>
+      <th scope="col" style="font-family: 'DotGothic16', sans-serif;">問題名</th>
     </tr>
   </thead>
   <tbody>
     {% for problem in problems %}
     <tr>
-      <th scope="row">{{ loop.index }}</th>
+      <th scope="row" style="font-family: 'DotGothic16', sans-serif;">{{ loop.index }}</th>
       <td>
-        <a href="{{ url_for('problems.problem', id=loop.index|string) }}">{{ problem }}<br></a>
+        <a href="{{ url_for('problems.problem', id=loop.index|string) }}" style="font-family: 'DotGothic16', sans-serif;">{{ problem }}<br></a>
       </td>
     </tr>
     {% endfor %}
