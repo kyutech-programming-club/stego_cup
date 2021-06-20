@@ -8,7 +8,7 @@ def index():
   problems = select_all_questions(container)
   return render_template('index.html', problems=problems)
   
-@bp.route("/<int:id>/promblem", methods=('GET', 'POST') )
+@bp.route("/<int:id>/problem", methods=('GET', 'POST') )
 def problem(id):
   problem_list = select_problem(container, id)
   temp_ans = problem_list[1]
