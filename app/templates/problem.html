@@ -5,6 +5,7 @@
 <br>
 <h3>{{ problem }}</h3>
 <p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
+<p id="fuga" style="visibility:hidden">{{ id }}</p>
 
 <script id=hoge>
   var temp_ans = document.getElementById("ahi").textContent
@@ -61,6 +62,33 @@
   window.onkeydown = function(e){
     audioType.play();
   };
+</script>
+
+<iframe allow="autoplay" style="display:none" id="question_audio"></iframe> 
+<script>
+  var question_num = document.getElementById("fuga").textContent;
+  console.log(question_num);
+  if (question_num == 1) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q1.mp3';
+  } else if (question_num == 2) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q2.mp3';
+  }  else if (question_num == 3) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q3.mp3';
+  }  else if (question_num == 4) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q4.mp3';
+  }  else if (question_num == 5) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q5.mp3';
+  }  else if (question_num == 6) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q6.mp3';
+  }  else if (question_num == 7) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q7.mp3';
+  }  else if (question_num == 8) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q8.mp3';
+  }  else if (question_num == 9) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q9.mp3';
+  }  else if (question_num == 10) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q10.mp3';
+  }
 </script>
 
 {% endblock %}
