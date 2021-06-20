@@ -1,4 +1,52 @@
-<h1>This is home page</h1>
-<p>
-  This page will display a list of problems!
-</p>
+{% extends 'default.html' %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="font-family: 'DotGothic16', sans-serif;" href="#"><b>問題一覧</b></a>
+  </div>
+</nav>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="font-family: 'DotGothic16', sans-serif;">#</th>
+      <th scope="col" style="font-family: 'DotGothic16', sans-serif;">問題名</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for problem in problems %}
+    <tr>
+      <th scope="row" style="font-family: 'DotGothic16', sans-serif;">{{ loop.index }}</th>
+      <td>
+        <a href="{{ url_for('problems.problem', id=loop.index|string) }}" style="font-family: 'DotGothic16', sans-serif;">{{ problem }}<br></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  
+  <iframe src=path allow="autoplay" style="display:none" id="opening_audio1"></iframe> 
+  <script>
+    const btn_play = document.getElementById("btn_play");
+    const btn_pause = document.getElementById("btn_pause");
+    const audioElement = document.querySelector("audio");
+
+    btn_play.addEventListener("click", e => {
+      audioElement.play();
+    });
+
+    btn_pause.addEventListener("click", e => {
+      audioElement.pause();
+    });
+  </script>
+
+  <iframe allow="autoplay" style="display:none" id="opening_audio"></iframe> 
+  <script>
+    var random_num = Math.floor(Math.random() * 2);
+    if (random_num == 0) {
+      document.getElementById('opening_audio').src = '../static/music/voice_sample/Opening1.mp3';
+    } else if (random_num == 1) {
+      document.getElementById('opening_audio').src = '../static/music/voice_sample/Opening2.mp3';
+    }
+  </script>
+{% endblock %}

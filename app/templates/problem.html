@@ -1,4 +1,102 @@
-<h1>Problem Num</h1>
-<p>
-  This page will display the question text, editor, etc.
-</p>
+{% extends 'default.html' %}
+
+{% block content %}
+<h2 class="m-2" style="font-family: 'DotGothic16', sans-serif;">
+  <b>問題文</b>
+</h2>
+<hr>
+<p class="m-2" style="font-family: 'DotGothic16', sans-serif;">{{ problem }}</p>
+<p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
+<p id="fuga" style="visibility:hidden">{{ id }}</p>
+
+<script id=hoge>
+  var temp_ans = document.getElementById("ahi").textContent
+  console.log(temp_ans);
+  var code = "";
+  console.log(code);
+  var editor = CodeMirror(document.body, {
+    value: temp_ans,
+    lineNumbers: true,
+    theme: 'monokai custom',
+    mode: 'python'
+  }).on('change', after_editor => {
+    code = after_editor.getValue();
+    var val = document.getElementById('form');
+    val.value = code;
+    console.log(val)
+  });
+</script>
+<br>
+<h2 class="m-2" style="font-family: 'DotGothic16', sans-serif;">
+  <b>選択肢</b>
+</h2>
+<div class="container">
+  <div class="row justify-content-md-center">
+    {% for choice in choice_ans %}
+      <div class="col-sm">
+        <h5 class="text-center" style="font-family: 'DotGothic16', sans-serif;">{{ choice }}</h5>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      <form action="/" method="get">
+        <input class="btn btn-danger" type="submit" value='戻る'>
+      </form>
+    </div>
+    <div class="col col-lg-2"></div>
+    <div class="col col-lg-2">
+      <form method="POST">
+        <input type="hidden" id="form" name="code" value="">
+        <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
+        <input class="btn btn-primary" id="btn" type="submit" value='提出'/>
+      </form>
+    </div>
+  </div>
+</div>
+
+<audio id="type" src="../static/music/voice_sample/Muda_short.mp3" type="audio/meg"></audio>
+  
+<script>
+  const audioType = document.getElementById("type");
+  window.onkeydown = function(e){
+    audioType.play();
+  };
+</script>
+
+<iframe allow="autoplay" style="display:none" id="question_audio"></iframe> 
+<script>
+  var question_num = document.getElementById("fuga").textContent;
+  var random_num = Math.floor(Math.random() * 3);
+  console.log(question_num);
+  if (question_num == 1 && random_num == 1) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q1miss.mp3';
+  } else if (question_num == 1 && (random_num == 2 || random_num || 3)) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q1.mp3';
+  } else if (question_num == 2) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q2.mp3';
+  }  else if (question_num == 3) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q3.mp3';
+  }  else if (question_num == 4) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q4.mp3';
+  }  else if (question_num == 5) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q5.mp3';
+  }  else if (question_num == 6 && random_num == 1) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q6miss.mp3';
+  } else if (question_num == 6 && (random_num == 2 || random_num == 3)) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q6.mp3';
+  } else if (question_num == 7) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q7.mp3';
+  }  else if (question_num == 8) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q8.mp3';
+  }  else if (question_num == 9) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q9.mp3';
+  }  else if (question_num == 10) {
+    document.getElementById('question_audio').src = '../static/music/voice_sample/q10.mp3';
+  }
+</script>
+
+{% endblock %}
