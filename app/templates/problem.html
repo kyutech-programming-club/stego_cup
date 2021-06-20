@@ -12,7 +12,6 @@
 <script id=hoge>
   var temp_ans = document.getElementById("ahi").textContent
   console.log(temp_ans);
-
   var code = "";
   console.log(code);
   var editor = CodeMirror(document.body, {
@@ -28,7 +27,9 @@
   });
 </script>
 <br>
-<h5>選択肢</h5>
+<h2 class="m-2">
+  <b>選択肢</b>
+</h2>
 <div class="container">
   <div class="row justify-content-md-center">
     {% for choice in choice_ans %}
