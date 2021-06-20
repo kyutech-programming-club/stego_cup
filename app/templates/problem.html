@@ -1,9 +1,11 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<h2>問題文</h2>
-<br>
-<h3>{{ problem }}</h3>
+<h2 class="m-2">
+  <b>問題文</b>
+</h2>
+<hr>
+<p class="m-2">{{ problem }}</p>
 <p id="ahi" style="visibility:hidden">{{ temp_ans }}</p>
 
 <script id=hoge>
