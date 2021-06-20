@@ -29,29 +29,27 @@
   <button id="btn_play">再生</button>
   <button id="btn_pause">一時停止</button>
 
-  <iframe src=path allow="autoplay" style="display:none" id="opening_audio1"></iframe> 
   <script>
-    var random_num = Math.floor(Math.random * 2) + 1;
-    console.log(random_num)
-    if (random_num == 1){
-      var path = "../static/music/voice_sample/Opening1.mp3";
-    } else {
-      var path = "../static/music/voice_sample/Opening2.mp3";
+    const btn_play = document.getElementById("btn_play");
+    const btn_pause = document.getElementById("btn_pause");
+    const audioElement = document.querySelector("audio");
+
+    btn_play.addEventListener("click", e => {
+      audioElement.play();
+    });
+
+    btn_pause.addEventListener("click", e => {
+      audioElement.pause();
+    });
+  </script>
+
+  <iframe allow="autoplay" style="display:none" id="opening_audio"></iframe> 
+  <script>
+    var random_num = Math.floor(Math.random() * 2);
+    if (random_num == 0) {
+      document.getElementById('opening_audio').src = '../static/music/voice_sample/Opening1.mp3';
+    } else if (random_num == 1) {
+      document.getElementById('opening_audio').src = '../static/music/voice_sample/Opening2.mp3';
     }
-    document.getElementById('opening_audio1').src = path;
   </script>
 {% endblock %}
-
-<script>
-  const btn_play = document.getElementById("btn_play");
-  const btn_pause = document.getElementById("btn_pause");
-  const audioElement = document.querySelector("audio");
-
-  btn_play.addEventListener("click", e => {
-    audioElement.play();
-  });
-
-  btn_pause.addEventListener("click", e => {
-    audioElement.pause();
-  });
-</script>
