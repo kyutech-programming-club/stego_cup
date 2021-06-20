@@ -1,13 +1,29 @@
 {% extends 'default.html' %}
 
 {% block content %}
-  <h1>問題一覧</h1>
-  <hr>
-  {% for problem in problems %}
-  {{ loop.index }}
-  <a href="{{ url_for('problems.problem', id=loop.index|string) }}">{{ problem }}<br></a>
-  {% endfor %}
-  
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">問題一覧</a>
+  </div>
+</nav>
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">問題名</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for problem in problems %}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>
+        <a href="{{ url_for('problems.problem', id=loop.index|string) }}">{{ problem }}<br></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
   
   <audio src="../static/music/n21.mp3" type="audio/mpeg"></audio>
   <button id="btn_play">再生</button>
