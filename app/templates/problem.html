@@ -25,6 +25,11 @@
   });
 </script>
 
+<h5>選択肢</h5>
+{% for choice in choice_ans %}
+  <p>{{ choice }}</p>
+{% endfor %}
+
 <form method="POST">
   <input type="hidden" id="form" name="code" value="">	
   <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
