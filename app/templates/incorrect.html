@@ -1,5 +1,24 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<h1>不正解です！！</h1>
+<h1 style="font-family: 'DotGothic16', sans-serif;
+            position: absolute;
+	          top: 50%;
+	          left: 50%;
+	          transform: translate(-50%, -50%);
+	          padding: 0px 0px;
+	          text-align: center;
+	          width: 900px;
+            font-size: 700%;">
+            不正解です！！</h1>
+
+<iframe allow="autoplay" style="display:none" id="incorrect_sound"></iframe> 
+<script>
+  var random_num = Math.floor(Math.random() * 2);
+  if (random_num == 0) {
+    document.getElementById('incorrect_sound').src = '../static/music/voice_sample/Huseikai1.mp3';
+  } else if (random_num == 1) {
+    document.getElementById('incorrect_sound').src = '../static/music/voice_sample/Huseikai2.mp3';
+  }
+</script>
 {% endblock %}
