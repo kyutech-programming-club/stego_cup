@@ -24,21 +24,35 @@
     console.log(val)
   });
 </script>
-
+<br>
 <h5>選択肢</h5>
-{% for choice in choice_ans %}
-  <p>{{ choice }}</p>
-{% endfor %}
-
-<form method="POST">
-  <input type="hidden" id="form" name="code" value="">	
-  <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
-  <input class="btn btn-primary" id="btn" type="submit" value='提出' onclick='return confirm("ほんとによき？");'/>
-</form>
-
-<form action="/" method="get">
-  <input class="btn btn-danger" type="submit" value='戻る'>
-</form>
+<div class="container">
+  <div class="row justify-content-md-center">
+    {% for choice in choice_ans %}
+      <div class="col-sm">
+        <h5 class="text-center">{{ choice }}</h5>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      <form action="/" method="get">
+        <input class="btn btn-danger" type="submit" value='戻る'>
+      </form>
+    </div>
+    <div class="col col-lg-2"></div>
+    <div class="col col-lg-2">
+      <form method="POST">
+        <input type="hidden" id="form" name="code" value="">
+        <!-- ボタンを押したら、request.form[code]つまり、エディタの中身が返される。 -->
+        <input class="btn btn-primary" id="btn" type="submit" value='提出' onclick='return confirm("ほんとによき？");'/>
+      </form>
+    </div>
+  </div>
+</div>
 
 <audio id="type" src="../static/music/cat_like2a.mp3" type="audio/meg"></audio>
   
