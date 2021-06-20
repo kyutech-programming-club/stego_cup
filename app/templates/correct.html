@@ -1,7 +1,17 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<h1>結果ハッピョーーーーう！！</h1>
+<h1 style="font-family: 'DotGothic16', sans-serif;
+            position: absolute;
+	          top: 50%;
+	          left: 50%;
+	          transform: translate(-50%, -50%);
+	          padding: 0px 0px;
+	          text-align: center;
+	          width: 900px;
+            font-size: 700%;" >
+            正解です！！
+          </h1>
 <iframe allow="autoplay" style="display:none" id="correct_sound"></iframe> 
 <script>
   var random_num = Math.floor(Math.random() * 3);

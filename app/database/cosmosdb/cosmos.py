@@ -68,7 +68,7 @@ def select_choice_ans(container, id):
     item = container.query_items(query, enable_cross_partition_query=True)
     answer = list(item)
     c_ans = answer[0]['choice_ans'].split(',')
-    return c_ans[2]
+    return c_ans
   
   except exceptions.CosmosResourceNotFoundError:
     print('A database with id \'{0}\' does not exist'.format(id))
